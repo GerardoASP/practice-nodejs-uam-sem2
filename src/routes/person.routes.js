@@ -12,8 +12,21 @@ const person_routes = express.Router()
 */
 //:(parametro)
 
-person_routes.post('/',(req,res)=>{})
-person_routes.get('/',(req,res)=>{})//listar
+person_routes.post('/',(req,res)=>{
+	const new_person = person_model(req.body);
+	new_person
+		.save()
+		.then((data) => res.json(data))
+		.catch((err) => res.json(err));
+});
+
+person_routes.get('/',(req,res)=>{
+	person_model
+	 .find()
+	 .then((data) => res.json(data))
+	.catch((err) => res.json(err));
+});
+
 person_routes.get('/:personId',(req,res)=>{})//mirar 
 person_routes.put('/:personId',(req,res)=>{}) //actualizar
 person_routes.delete('/:personId',(req,res)=>{}) //eliminar
